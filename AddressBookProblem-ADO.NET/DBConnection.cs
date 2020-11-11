@@ -20,7 +20,7 @@ namespace AddressBookProblem_ADO.NET
         public SqlConnection GetConnection()
         {
             /// Specifying the connectionString from the sql server connection.
-            string connectiongString = @"Data Source=DESKTOP-4849HJR;Initial Catalog=payroll_service;Integrated Security=True;User ID=dheermeena;Password=Dheer@1998";
+            string connectiongString = @"Data Source=DESKTOP-4849HJR;Initial Catalog=AddressBook_System;Integrated Security=True;User ID=dheermeena;Password=Dheer@1998";
             SqlConnection connection = new SqlConnection(connectiongString);
             return connection;
         }
