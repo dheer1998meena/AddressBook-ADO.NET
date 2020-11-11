@@ -30,7 +30,7 @@ namespace AddressBookProblem_ADO.NET
             connection.Close();
         }
         /// <summary>
-        /// UC1 Getting all the stored records in the address book service table by fetching all the records
+        /// UC2 Getting all the stored records in the address book service table by fetching all the records
         /// </summary>
         public void GetAllContact()
         {
