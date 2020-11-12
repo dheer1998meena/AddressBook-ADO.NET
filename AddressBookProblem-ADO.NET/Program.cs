@@ -20,11 +20,13 @@ namespace AddressBookProblem_ADO.NET
             /// UC2 Getting all the stored records in the address book service table by fetching all the records
             repository.GetAllContact();
             /// UC 3: Adds the new contact into DB table.
-            //AddNewContactDetails();
+            AddNewContactDetails();
             /// UC 4 Ability to Edit the contactType of the existing contact.
-            Console.WriteLine(repository.EditContactUsingName("Richa", "Sharma", "Speaker") ? "Update done successfully\n" : "Update failed");
+            Console.WriteLine(repository.EditContactUsingName("Richa", "Sharma", "Speaker") ? "Update done successfully\n" : "Delete operation failed");
             /// UC5 Ability to  Deletes the contact with given first name and last name.
             Console.WriteLine(repository.DeleteContact("Richa", "Sharma") ? "Deleted Contact successfully\n" : "Update failed");
+            /// UC6 Retrieves the contacts from a given state or city.
+            repository.RetrieveContactFromCityOrStateName();
         }
         /// UC 3: Adds the new contact into DB table.
         public static void AddNewContactDetails()
