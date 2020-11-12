@@ -5,7 +5,7 @@ Create procedure dbo.spAddContactDetails
 	@City	varchar(150),	
 	@StateName	varchar(150),	
 	@Zip	int,
-    @PhoneNo int,
+    @PhoneNo bigint,
 	@Email	varchar(150),	
 	@addressBookType	varchar(150),
 	@addressBookName	varchar(150)
