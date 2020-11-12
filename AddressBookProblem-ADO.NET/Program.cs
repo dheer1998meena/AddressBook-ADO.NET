@@ -23,6 +23,8 @@ namespace AddressBookProblem_ADO.NET
             //AddNewContactDetails();
             /// UC 4 Ability to Edit the contactType of the existing contact.
             Console.WriteLine(repository.EditContactUsingName("Richa", "Sharma", "Speaker") ? "Update done successfully\n" : "Update failed");
+            /// UC5 Ability to  Deletes the contact with given first name and last name.
+            Console.WriteLine(repository.DeleteContact("Richa", "Sharma") ? "Deleted Contact successfully\n" : "Update failed");
         }
         /// UC 3: Adds the new contact into DB table.
         public static void AddNewContactDetails()
