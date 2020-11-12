@@ -6,6 +6,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -61,7 +62,7 @@ namespace AddressBookProblem_ADO.NET
                             model.City = reader.GetString(3);
                             model.State = reader.GetString(4);
                             model.Zip = reader.GetInt32(5);
-                            model.PhoneNumber = reader.GetInt32(6);
+                            model.PhoneNumber = reader.GetInt64(6);
                             model.EmailId = reader.GetString(7);
                             model.AddressBookType = reader.GetString(8);
                             model.AddressBookName = reader.GetString(9);
@@ -88,6 +89,56 @@ namespace AddressBookProblem_ADO.NET
                 connection.Close();
             }
 
+        }
+        /// <summary>
+        /// UC3 Method to insert contact to the table using a stored procedure
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool AddDataToTable(AddressBookModel model)
+        {
+            /// Creates a new connection for every method to avoid "ConnectionString property not initialized" exception
+            DBConnection dbc = new DBConnection();
+            connection = dbc.GetConnection();
+            try
+            {
+                /// Using the connection established
+                using (connection)
+                {
+                    /// Implementing the stored procedure
+                    SqlCommand command = new SqlCommand("dbo.spAddContactDetails", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@FirstName", model.FirstName);
+                    command.Parameters.AddWithValue("@LastName", model.LastName);
+                    command.Parameters.AddWithValue("@AddressDetails", model.Address);
+                    command.Parameters.AddWithValue("@City", model.City);
+                    command.Parameters.AddWithValue("@StateName", model.State);
+                    command.Parameters.AddWithValue("@Zip", model.Zip);
+                    command.Parameters.AddWithValue("@PhoneNo", model.PhoneNumber);
+                    command.Parameters.AddWithValue("@Email", model.EmailId);
+                    command.Parameters.AddWithValue("@addressBookType", model.AddressBookType);
+                    command.Parameters.AddWithValue("@addressBookName", model.AddressBookName);
+                    
+                    connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    connection.Close();
+                    /// Return the result of the transaction i.e. the dml operation to update data
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            /// Catching any type of exception generated during the run time
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }
